@@ -15,15 +15,16 @@ buttonNumbers.forEach((button) => {
     } else if (e.target.dataset.key === "+") {
       displayBox.textContent += "+";
     } else if (e.target.dataset.key === "-") {
-      displayBox.textContent = "-";
+      displayBox.textContent += "-";
     } else if (e.target.dataset.key === "*") {
-      displayBox.textContent = "*";
+      displayBox.textContent += "*";
     } else if (e.target.dataset.key === "/") {
-      displayBox.textContent = "/";
-    } else if (e.target.dataset.key === "+") {
-      displayBox.textContent = "+";
+      displayBox.textContent += "/";
     } else if (e.target.dataset.key === "=") {
-      operate();
+      // operate();
+      let result = displayBox.textContent;
+      let finalResult = Function("return " + result)();
+      console.log(finalResult);
     } else displayBox.textContent += Number(e.target.dataset.key);
   });
 });
@@ -43,3 +44,7 @@ function operate(operator, num1 = 0, num2 = 0) {
     return add(num1, num2);
   }
 }
+
+// const expression = "2+4";
+// const res = Function("return " + expression)();
+// console.log(res);
