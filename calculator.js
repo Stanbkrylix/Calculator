@@ -1,13 +1,16 @@
 "use strict";
 
-const displayBox = document.querySelector(".value-container");
-const buttonNumbers = document.querySelectorAll(".button-divs");
-let num1;
-let num2;
-let num3;
-let operator;
-let emptyArray = [];
-let emptyArray2 = [];
+const displayBox = document.querySelector(".display-Value");
+const buttonNumbers = document.querySelectorAll(".numbers");
+const operand = document.querySelectorAll(".operand");
+const resultContainer = document.querySelector(".result-container");
+const numberAndOperation = document.querySelector(".numberAndOperation");
+let num1 = "";
+let num2 = "";
+let result = null;
+let operator = "";
+
+let haveDot = false;
 
 function operate(operator, num1, num2) {
   function add(num1, num2) {
@@ -74,86 +77,80 @@ function operate(operator, num1, num2) {
 
 //============================ Equation function =============================
 
-function equal() {
-  if (displayBox.textContent.includes("+")) {
-    operator = "+";
-    displayBox.textContent = operate(operator, num1, num2);
-    num2 = "";
-  } else if (displayBox.textContent.includes("-")) {
-    operator = "-";
-    displayBox.textContent = operate(operator, num1, num2);
-    num2 = "";
-  } else if (displayBox.textContent.includes("*")) {
-    operator = "*";
-    displayBox.textContent = operate(operator, num1, num2);
-    num2 = "";
-  } else if (displayBox.textContent.includes("/")) {
-    operator = "/";
-    displayBox.textContent = operate(operator, num1, num2);
-    num2 = "";
+function selectedOperator(key) {
+  if (key === "/") {
+    operator = key;
+    return operator;
+  }
+  if (key === "+") {
+    operator = key;
+    return operator;
+  }
+  if (key === "-") {
+    operator = key;
+    return operator;
+  }
+  if (key === "*") {
+    operator = key;
+    return operator;
   }
 }
 
-displayBox.textContent = "";
+function oneOperator(operator) {
+  let array = displayBox.textContent.split("");
+  let currentOperator = "";
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] === operator) {
+      array.pop();
+    }
+  }
+  let finalOutput = array.join("");
+  return finalOutput;
+}
+
+// else if (displayBox.textContent.includes(selectedOperator(key))) {
+//   displayBox.textContent = operate(operator, num1, num2);
+// } else if (displayBox.textContent.includes(selectedOperator(key))) {
+//   displayBox.textContent = operate(operator, num1, num2);
+// } else if (displayBox.textContent.includes(selectedOperator(key))) {
+//   displayBox.textContent = operate(operator, num1, num2);
+// }
+
+// displayBox.textContent = "";
+
+//button operation
 buttonNumbers.forEach((button) => {
   button.addEventListener("click", (e) => {
     e.preventDefault();
 
-    if (e.target.dataset.key === "clear") {
-      num1 = "";
-      num2 = "";
-      operator = "";
-      displayBox.textContent = "";
-      emptyArray = [];
-    } else if (e.target.dataset.key === "+") {
-      equal();
-      console.log(operator);
-      num1 = +displayBox.textContent;
-      displayBox.textContent += "+";
-      emptyArray = [];
-    } else if (e.target.dataset.key === "-") {
-      equal();
-      num1 = +displayBox.textContent;
-      displayBox.textContent += "-";
-      emptyArray = [];
-    } else if (e.target.dataset.key === "*") {
-      equal();
-      num1 = +displayBox.textContent;
-      displayBox.textContent += "*";
-      emptyArray = [];
-    } else if (e.target.dataset.key === "/") {
-      equal();
-      num1 = +displayBox.textContent;
-      displayBox.textContent += "/";
-      emptyArray = [];
-    } else if (e.target.dataset.key === ".") {
-      displayBox.textContent += ".";
-      emptyArray = [];
-    } else if (e.target.dataset.key === "del") {
-      // equal();
-      let displayArray = displayBox.textContent.split("");
-      displayArray.pop();
-      displayBox.textContent = displayArray.join("");
-      emptyArray = [];
+    num1 += e.target.textContent;
+
+    // making dot print one time
+    if (e.target.textContent === "." && !haveDot) {
+      haveDot = true;
+    } else if (e.target.textContent === "." && haveDot) {
+      return;
     }
 
-    //============================= Determines which operation happens =============================================
-    else if (e.target.dataset.key === "=") {
-      equal();
-      // emptyArray = [];
-    }
+    displayBox.textContent = num1;
+  });
+});
 
-    //========================= To assign a number to num2 ========================================================
-    else {
-      if (typeof num1 === "number") {
-        num2 = Number(e.target.dataset.key);
-        emptyArray.push(num2);
-        num2 = +emptyArray.join("");
-        console.log(num1, num2);
-      }
+// function for operator buttons
+operand.forEach(function (selectedOperation) {
+  selectedOperation.addEventListener("click", (e) => {
+    // if num1 does not exist
+    if (!num1) return;
+    haveDot = false;
 
-      displayBox.textContent += Number(e.target.dataset.key);
+    const operation = e.target.dataset.key;
+    // if they exist or true
+    if (num1 && num2 && operator) {
+      operate(num1, num2, operator);
+    } else {
+      result += parseFloat(num1);
     }
+    console.log(result);
   });
 });
 
@@ -162,3 +159,7 @@ buttonNumbers.forEach((button) => {
 // let result = displayBox.textContent;
 // let finalResult = Function("return " + result)();
 // displayBox.textContent = finalResult;
+let arr = [3, 6, 78, 8];
+const n = null;
+
+console.log(arr.join(""));
