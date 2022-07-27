@@ -7,7 +7,7 @@ body {
   height: 500px;
   border: 5px solid #0088cc;
   border-radius: 5px;
-  background-color: rgb(209, 209, 209);
+  background-color: rgb(128, 128, 128);
   padding: 10px;
   text-align: center;
 }
@@ -18,7 +18,8 @@ body {
   border: 1px solid black;
   border-radius: 5px;
   margin-bottom: 10px;
-  font-size: 14px;
+  font-weight: 600;
+  font-size: large;
   display: flex;
   justify-content: space-between;
 }
@@ -48,7 +49,7 @@ body {
 .button-divs {
   width: 60px;
   height: 60px;
-  border: 1px solid black;
+  border: 1px solid rgb(255, 255, 255);
   border-radius: 5px;
   margin-bottom: 5px;
   margin-right: 5px;
@@ -63,4 +64,23 @@ body {
   background-color: #0088cc;
   color: white;
   cursor: pointer;
+}
+.operand,
+.dot,
+.equal,
+.delete,
+.clear {
+  background-color: #0088cc;
+  color: white;
+}
+.operand:hover,
+.dot:hover,
+.equal:hover,
+.delete:hover,
+.clear:hover {
+  background-color: rgb(255, 168, 183);
+}
+.numbers {
+  font-weight: 600;
+  color: white;
 }
